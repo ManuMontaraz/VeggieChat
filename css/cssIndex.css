@@ -1,0 +1,100 @@
+:root{
+   /*COLORS*/
+   --COLOR_BACKGROUND:#202325;
+   --COLOR_MAIN:#31a783;
+   --COLOR_SECONDARY:#56a2e8;
+
+   /*PADDING*/
+   --PADDING_NANO:calc(var(--PADDING_TINY)/2);
+   --PADDING_TINY:calc(var(--PADDING)/2);
+   --PADDING:1rem;
+   --PADDING_MEDIUM:calc(var(--PADDING)*1.5);
+   --PADDING_BIG:calc(var(--PADDING_MEDIUM)*1.5);
+   
+   /*TRANSITION*/
+   --TRANSITION_DELAY:0s;
+   --TRANSITION_INSTANT: calc(var(--TRANSITION_SHORTEST)/2);
+   --TRANSITION_SHORTEST: calc(var(--TRANSITION_SHORT)/2);
+   --TRANSITION_SHORT: calc(var(--TRANSITION)/2);
+   --TRANSITION: 1s;
+   --TRANSITION_LONG: calc(var(--TRANSITION)*1.5);
+   --TRANSITION_LONGEST: calc(var(--TRANSITION_LONG)*1.5);
+   --TRANSITION_INFINITY: calc(var(--TRANSITION_LONGEST)*1.5);
+   --TRANSITION_FUNCTION_1: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+
+   /*OTHER*/
+   --BORDER_RADIUS: .5rem;
+   --BORDER: none;
+}
+
+body{
+   padding: 0px;
+   margin: 0px;
+   display: grid;
+   background-color: var(--COLOR_BACKGROUND);
+   > *:not(#fiveserver-info-wrapper){
+      width: 100dvw;
+      height: 100dvh;
+      grid-column: 1;
+      grid-row: 1;
+      display: grid;
+      justify-items: center;
+      align-items: center;
+      overflow: hidden;
+      pointer-events: none;
+      opacity: 0;
+      transition: var(--TRANSITION_LONGEST) ;
+      &.active{
+         pointer-events: all;
+         opacity: 1;
+      }
+      .container{
+         margin-bottom: -100%;
+         transition: var(--TRANSITION) var(--TRANSITION_FUNCTION_1);
+      }
+   }
+   input{
+      padding: var(--PADDING_TINY);
+      border-radius: var(--BORDER_RADIUS);
+      width: 6rem;
+      height: .5rem;
+      display: block;
+      margin: var(--PADDING) auto var(--PADDING) auto;
+      transition: var(--TRANSITION) var(--TRANSITION_DELAY) var(--TRANSITION_FUNCTION_1);
+      border: var(--BORDER);
+
+      &[type="submit"]{
+         width: min-content;
+         height: min-content;
+         cursor: pointer;
+         background-color: var(--COLOR_MAIN);
+         font-weight: bold;
+         transition: var(--TRANSITION_INSTANT);
+         &:hover{
+            transform: scale(1.05);
+         }
+         &:active{
+            transform: scale(0.95);
+         }
+      }
+
+      &:first-child{
+         margin-top: 0px;
+      }
+
+      &:last-child{
+         margin-bottom: 0px;
+      }
+   }
+}
+
+
+#login.active{
+   .container{
+      margin-bottom: 25%;
+      input:not([type="submit"]){
+         width: 16rem;
+         height: 1rem;
+      }
+   }
+}
