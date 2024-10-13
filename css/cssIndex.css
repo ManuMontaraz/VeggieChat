@@ -22,6 +22,11 @@
    --TRANSITION_INFINITY: calc(var(--TRANSITION_LONGEST)*1.5);
    --TRANSITION_FUNCTION_1: cubic-bezier(0.68, -0.55, 0.27, 1.55);
 
+   /*SHADOW*/
+   --SHADOW_INSET: 0px .125rem .125rem 0px rgba(0,0,0,0.25), 0px .25rem .25rem 0px rgba(0,0,0,0.25) inset;
+   --SHADOW: 0px .25rem .25rem 0px rgba(0,0,0,0.25);
+   --SHADOW_FAR: 0px .25rem .5rem .25rem rgba(0,0,0,0.25);
+
    /*OTHER*/
    --BORDER_RADIUS: .5rem;
    --BORDER: none;
@@ -32,6 +37,16 @@ body{
    margin: 0px;
    display: grid;
    background-color: var(--COLOR_BACKGROUND);
+   > #logo{
+      position: absolute;
+      opacity: 1 !important;
+      img{
+         position: absolute;
+         width: 32rem;  /*VARIABILIZAR*/
+         height: 8rem;  /*VARIABILIZAR*/
+         top: var(--PADDING_MEDIUM);
+      }
+   }
    > *:not(#fiveserver-info-wrapper){
       width: 100dvw;
       height: 100dvh;
@@ -43,14 +58,37 @@ body{
       overflow: hidden;
       pointer-events: none;
       opacity: 0;
-      transition: var(--TRANSITION_LONGEST) ;
+      transition: opacity (--TRANSITION_LONGEST);
+      .container{
+         margin-bottom: -200dvh;
+         transition: var(--TRANSITION_INSTANT);
+      }
+      &.opening {
+         input{
+            transition: var(--TRANSITION) var(--TRANSITION_DELAY) var(--TRANSITION_FUNCTION_1);
+         }
+         .container{
+            transition: var(--TRANSITION) var(--TRANSITION_DELAY) var(--TRANSITION_FUNCTION_1);
+         }
+      }
       &.active{
+         
+      }
+      &.active,&.opening{
          pointer-events: all;
          opacity: 1;
-      }
-      .container{
-         margin-bottom: -100%;
-         transition: var(--TRANSITION) var(--TRANSITION_FUNCTION_1);
+         .container{
+            margin-bottom: var(--margin_bottom);
+            
+            input:not([type="submit"]){
+               width: 16rem;
+               height: 1rem;
+               transform: scale(1);
+            }
+            input[type="submit"]{
+               transform: scale(1);
+            }
+         }
       }
    }
    input{
@@ -60,21 +98,26 @@ body{
       height: .5rem;
       display: block;
       margin: var(--PADDING) auto var(--PADDING) auto;
-      transition: var(--TRANSITION) var(--TRANSITION_DELAY) var(--TRANSITION_FUNCTION_1);
       border: var(--BORDER);
+      transition: var(--TRANSITION_INSTANT);
+      transform: scale(.66);
 
       &[type="submit"]{
          width: min-content;
          height: min-content;
          cursor: pointer;
          background-color: var(--COLOR_MAIN);
-         font-weight: bold;
-         transition: var(--TRANSITION_INSTANT);
+         font-weight: 900;
+         color:white;
+         box-shadow: var(--SHADOW);
+
          &:hover{
-            transform: scale(1.05);
+            transform: scale(1.05) !important;
+            box-shadow: var(--SHADOW_FAR);
          }
          &:active{
-            transform: scale(0.95);
+            transform: scale(0.95) !important;
+            box-shadow: var(--SHADOW_INSET);
          }
       }
 
@@ -88,13 +131,59 @@ body{
    }
 }
 
-
-#login.active{
+#login{
    .container{
-      margin-bottom: 25%;
-      input:not([type="submit"]){
-         width: 16rem;
-         height: 1rem;
+      --margin_bottom: 15dvh;
+   }
+}
+
+#content{
+   .container{
+      --margin_bottom: 0dvh;
+   }
+   width: 100%;
+   height: 100%;
+   display: grid;
+   grid-template-columns: 1fr 2fr;
+   &>*{
+      width: calc(100% - var(--PADDING_BIG)*2);
+      height: calc(100% - var(--PADDING_BIG)*2);
+      grid-row: 1;
+      border-radius: var(--BORDER_RADIUS);
+   }
+   &:not(.opening){
+
+   }
+   #chat_viewers{
+      background-color: white;
+   }
+   #chat_content{
+      --input_size: 3rem;
+      display: grid;
+      grid-template-rows: calc(100% - var(--input_size) - var(--PADDING)*2) calc(var(--input_size) - var(--PADDING)*2);
+      background-color: var(--COLOR_MAIN);
+      #chat_form{
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         gap: var(--PADDING_TINY);
+         padding: var(--PADDING);
+         input{
+            margin: 0px;
+            transition: var(--TRANSITION_INSTANT);
+            &:not([type="submit"]){
+               width: 100%;
+               height: calc(var(--input_size) - var(--PADDING));
+
+            }
+            &[type="submit"]{
+               background-color: var(--COLOR_SECONDARY);
+               width: var(--input_size);
+               height: var(--input_size);
+               aspect-ratio: 1/1;
+               border-radius: 100%;
+            }
+         }
       }
    }
 }

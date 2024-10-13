@@ -10,15 +10,32 @@
 
 	</head>
 	<body>
-		<div id="login">
+		<div id="logo">
+			<img src="https://metrocuadradoestudio.com/wp-content/uploads/2024/01/blanco-logo.png">
+		</div>
+		<section id="login"><!--class="active"-->
 			<div class="container">
-				<form id="login_form">
-					<input id="name" type="text" placeholder="NOMBRE" style="--TRANSITION_DELAY:1s;" >
-					<input id="secret" type="text" placeholder="SECRETO" style="--TRANSITION_DELAY:1.5s;" >
-					<input type="submit" value="ENTRAR" style="--TRANSITION_DELAY:2s;">
+				<form id="login_form" method="get" >
+					<input id="name" type="text" name="name" placeholder="TU NOMBRE" style="--TRANSITION_DELAY:.75s;">
+					<input id="secret" type="text" name="secret" placeholder="NOMBRE DEL CHAT" style="--TRANSITION_DELAY:1s;">
+					<input id="password" type="password" name="password" placeholder="CONTRASEÑA" style="--TRANSITION_DELAY:1.25s;">
+					<input type="submit" value="ENTRAR" style="--TRANSITION_DELAY:1.5s;">
 				</form>
 			</div>
-		</div>
-		<div id="content"></div>
+		</section>
+		<section id="content"><!--class="active"-->
+			<div id="chat_viewers" class="container">
+				
+			</div>
+			<div id="chat_content" class="container" style="--TRANSITION_DELAY:.25s;">
+				<div id="chat_text"></div>
+				<div id="chat_bottom">
+					<form id="chat_form">
+						<input id="name" type="text" placeholder="ESCRIBE AQUÍ" style="--TRANSITION_DELAY:1.25s;">
+						<input type="submit" value="/\" style="--TRANSITION_DELAY:1.25s;">
+					</form>
+				</div>
+			</div>
+		</section>
 	</body>
 </html>
