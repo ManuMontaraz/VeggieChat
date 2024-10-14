@@ -31,12 +31,13 @@ function open_section(){
         
     }else{
         openThisID = "login"
+        document.querySelector("#logo").classList.add("open")
     }
 
     const OpenThis = document.querySelector(`#${openThisID}`)
     OpenThis.classList.add("opening")
     OpenThis.addEventListener("transitionend",()=>{
-        OpenThis.classList.add("active")
+        OpenThis.classList.add("open")
         OpenThis.classList.remove("opening")
     })
 }

@@ -3,15 +3,15 @@
 	<head>
 		<meta charset="utf-8">
 		<title>VeggieChat</title>
-		<link rel="shortcut icon" type="image/x-icon" href="img/logo_mini.png"/>
+		<link rel="shortcut icon" type="image/x-icon" href="img/logo_mini.svg"/>
 		
 		<link rel="stylesheet" href="css/cssIndex.css">
 		<script src="js/jsIndex.js"></script>
 
 	</head>
 	<body>
-		<div id="logo">
-			<img src="https://metrocuadradoestudio.com/wp-content/uploads/2024/01/blanco-logo.png">
+		<div id="logo" class="init">
+			<img src="img/logo.png">
 		</div>
 		<section id="login"><!--class="active"-->
 			<div class="container">
@@ -27,8 +27,12 @@
 			<div id="chat_viewers" class="container">
 				
 			</div>
-			<div id="chat_content" class="container" style="--TRANSITION_DELAY:.25s;">
-				<div id="chat_text"></div>
+			<div id="chat_container" class="container" style="--TRANSITION_DELAY:.25s;">
+				<div id="chat_text">
+					<div id="chat_text_content">
+
+					</div>
+				</div>
 				<div id="chat_bottom">
 					<form id="chat_form">
 						<input id="name" type="text" placeholder="ESCRIBE AQUÍ" style="--TRANSITION_DELAY:1.25s;">

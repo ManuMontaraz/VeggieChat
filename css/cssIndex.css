@@ -1,6 +1,8 @@
 :root{
    /*COLORS*/
    --COLOR_BACKGROUND:#202325;
+   --COLOR_BACKGROUND_2:white;
+   --COLOR_TEXT:#000000;
    --COLOR_MAIN:#31a783;
    --COLOR_SECONDARY:#56a2e8;
 
@@ -30,6 +32,8 @@
    /*OTHER*/
    --BORDER_RADIUS: .5rem;
    --BORDER: none;
+   --WIDTH_LOGO: 32rem;
+   --HEIGHT_LOGO: 8rem;
 }
 
 body{
@@ -40,11 +44,29 @@ body{
    > #logo{
       position: absolute;
       opacity: 1 !important;
+      pointer-events: none !important;
       img{
          position: absolute;
-         width: 32rem;  /*VARIABILIZAR*/
-         height: 8rem;  /*VARIABILIZAR*/
+         /*width: var(--WIDTH_LOGO);*/
+         height: var(--HEIGHT_LOGO);
+         top: calc(var(--HEIGHT_LOGO) - var(--HEIGHT_LOGO)*1.5);
+         opacity: 0;
+         transition: var(--TRANSITION_LONGEST),rotate var(--TRANSITION_SHORT);
+         @media (max-height: 600px){
+            left: var(--PADDING_MEDIUM);
+            
+            @media (max-width: 600px){
+               rotate: -90deg;
+            }
+         }
+      }
+      &.open img{
          top: var(--PADDING_MEDIUM);
+         opacity: 1;
+
+         @media (max-height: 600px) and (max-width: 600px){
+            top: inherit
+         }
       }
    }
    > *:not(#fiveserver-info-wrapper){
@@ -61,7 +83,8 @@ body{
       transition: opacity (--TRANSITION_LONGEST);
       .container{
          margin-bottom: -200dvh;
-         transition: var(--TRANSITION_INSTANT);
+         transition: var(--TRANSITION_SHORT);
+         overflow: hidden;
       }
       &.opening {
          input{
@@ -71,10 +94,7 @@ body{
             transition: var(--TRANSITION) var(--TRANSITION_DELAY) var(--TRANSITION_FUNCTION_1);
          }
       }
-      &.active{
-         
-      }
-      &.active,&.opening{
+      &.open,&.opening{
          pointer-events: all;
          opacity: 1;
          .container{
@@ -101,14 +121,16 @@ body{
       border: var(--BORDER);
       transition: var(--TRANSITION_INSTANT);
       transform: scale(.66);
+      background-color: var(--COLOR_BACKGROUND_2);
+      color: color-mix(in srgb, var(--COLOR_TEXT) 100%, var(--COLOR_BACKGROUND_2) 100%);
 
       &[type="submit"]{
          width: min-content;
          height: min-content;
          cursor: pointer;
          background-color: var(--COLOR_MAIN);
+         color: color-mix(in srgb, var(--COLOR_TEXT) 100%, var(--COLOR_MAIN) 100%);
          font-weight: 900;
-         color:white;
          box-shadow: var(--SHADOW);
 
          &:hover{
@@ -134,6 +156,10 @@ body{
 #login{
    .container{
       --margin_bottom: 15dvh;
+
+      @media (max-height: 600px) and (max-width: 600px){
+         margin-left: calc(var(--HEIGHT_LOGO));
+      }
    }
 }
 
@@ -145,23 +171,45 @@ body{
    height: 100%;
    display: grid;
    grid-template-columns: 1fr 2fr;
+   @media (max-width: 600px) {
+      grid-template-columns: 0fr 2fr;
+      #chat_viewers{
+         margin-left: var(--PADDING);
+         &:hover{
+            min-width:calc(100dvw - var(--PADDING_BIG));
+         }
+      }
+   }
    &>*{
-      width: calc(100% - var(--PADDING_BIG)*2);
-      height: calc(100% - var(--PADDING_BIG)*2);
+      width: calc(100% - var(--PADDING_BIG));
+      height: calc(100% - var(--PADDING_BIG));
+      min-width: var(--PADDING_BIG);
       grid-row: 1;
       border-radius: var(--BORDER_RADIUS);
+      margin-left: var(--PADDING);
+      margin-right: var(--PADDING);
    }
    &:not(.opening){
 
    }
    #chat_viewers{
-      background-color: white;
+      background-color: var(--COLOR_BACKGROUND_2);
    }
-   #chat_content{
+   #chat_container{
       --input_size: 3rem;
       display: grid;
       grid-template-rows: calc(100% - var(--input_size) - var(--PADDING)*2) calc(var(--input_size) - var(--PADDING)*2);
       background-color: var(--COLOR_MAIN);
+
+      #chat_text{
+         margin: var(--PADDING);
+         width: calc(100% - var(--PADDING)*4);
+         height: calc(100% - var(--PADDING)*4);
+         background-color: var(--COLOR_BACKGROUND_2);
+         border-radius: var(--BORDER_RADIUS);
+         padding: var(--PADDING);
+      }
+      
       #chat_form{
          display: flex;
          align-items: center;
@@ -182,6 +230,7 @@ body{
                height: var(--input_size);
                aspect-ratio: 1/1;
                border-radius: 100%;
+               color: color-mix(in srgb, var(--COLOR_TEXT) 100%, var(--COLOR_SECONDARY) 100%);
             }
          }
       }
