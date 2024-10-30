@@ -34,6 +34,14 @@
    --BORDER: none;
    --WIDTH_LOGO: 32rem;
    --HEIGHT_LOGO: 8rem;
+   --ROTATE_LOGO: -90deg;
+}
+
+.ok{
+   color:green;
+}
+.ko{
+   color:red;
 }
 
 body{
@@ -56,7 +64,7 @@ body{
             left: var(--PADDING_MEDIUM);
             
             @media (max-width: 600px){
-               rotate: -90deg;
+               rotate: var(--ROTATE_LOGO);
             }
          }
       }

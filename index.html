@@ -25,7 +25,15 @@
 		</section>
 		<section id="content"><!--class="active"-->
 			<div id="chat_viewers" class="container">
-				
+				<div id="server_container">
+					<h1>SERVIDOR</h1>
+					<p>Identificador: <span id="name_server"></span></p>
+					<p>Protegido: <span id="password_server"></span></p>
+				</div>
+				<div id="users_container">
+					<h1>USUARIOS</h1>
+					<div id="users_online"></div>
+				</div>
 			</div>
 			<div id="chat_container" class="container" style="--TRANSITION_DELAY:.25s;">
 				<div id="chat_text">
@@ -35,8 +43,8 @@
 				</div>
 				<div id="chat_bottom">
 					<form id="chat_form">
-						<input id="name" type="text" placeholder="ESCRIBE AQUÍ" style="--TRANSITION_DELAY:1.25s;">
-						<input type="submit" value="/\" style="--TRANSITION_DELAY:1.25s;">
+						<input id="chat_send_text" type="text" placeholder="ESCRIBE AQUÍ" style="--TRANSITION_DELAY:1.25s;">
+						<input type="submit" value="▲" style="--TRANSITION_DELAY:1.25s;">
 					</form>
 				</div>
 			</div>
